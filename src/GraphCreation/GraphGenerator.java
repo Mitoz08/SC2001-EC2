@@ -1,5 +1,9 @@
+package GraphCreation;
+
+import GraphCreation.AdjacencyList.AdjacencyList;
+
 public class GraphGenerator {
-    public static void Generate(int Vertices, int Edges) {
+    public static void Generate(int Vertices, int Edges, AdjacencyList AdjList) {
         // Add Class Object to the parameter to run addEdge Function
 
         int [] edgeCount = new int[Vertices];
@@ -10,11 +14,13 @@ public class GraphGenerator {
             for ( int j = i+1; j < Vertices; j++){
                 if (Edges == 0) break;
                 if (Math.random() < probability){
-                    // Create Edge
+                    // Create GraphCreation.Edge
 
                     Edge newEdge = new Edge(i,j,10); // Generate random weight
 
                     // Run addEdge function on both class
+                    AdjList.addEdge(newEdge);
+
 
                     edgeCount[i]++;
                     edgeCount[j]++;
@@ -36,6 +42,8 @@ public class GraphGenerator {
                 Edge newEdge = new Edge(i,terminalVertex,10); // Generate random weight
 
                 // Run addEdge function on both class
+
+                AdjList.addEdge(newEdge);
 
                 edgeCount[i]++;
                 edgeCount[terminalVertex]++;
