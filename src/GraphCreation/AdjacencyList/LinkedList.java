@@ -64,8 +64,10 @@ public class LinkedList {
 
         System.out.printf("Vertex %d: ",this.mainVertex);
         while (cur != null){
-            System.out.printf("(%d, %d) --> ",cur.tVertex,cur.weight);
+            System.out.printf("(%d, %d) ",cur.tVertex,cur.weight);
             cur = cur.nextNode;
+            if (cur == null) break;
+            System.out.print("--> ");
         }
         System.out.println();
     }
