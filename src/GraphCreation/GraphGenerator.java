@@ -1,9 +1,10 @@
 package GraphCreation;
 
 import GraphCreation.AdjacencyList.AdjacencyList;
+import GraphCreation.AdjacencyMatrix.AdjacencyMatrix;
 
 public class GraphGenerator {
-    public static void Generate(int Vertices, int Edges, AdjacencyList AdjList) {
+    public static void Generate(int Vertices, int Edges, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
         // Add Class Object to the parameter to run addEdge Function
 
         int [] edgeCount = new int[Vertices];
@@ -20,7 +21,7 @@ public class GraphGenerator {
 
                     // Run addEdge function on both class
                     AdjList.addEdge(newEdge);
-
+                    AdjMatrix.addEdge(newEdge);
 
                     edgeCount[i]++;
                     edgeCount[j]++;
@@ -44,6 +45,7 @@ public class GraphGenerator {
                 // Run addEdge function on both class
 
                 AdjList.addEdge(newEdge);
+                AdjMatrix.addEdge(newEdge);
 
                 edgeCount[i]++;
                 edgeCount[terminalVertex]++;
