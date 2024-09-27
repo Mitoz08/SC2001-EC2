@@ -1,4 +1,4 @@
-package GraphCreation.AdjacencyMatrix;
+package AdjacencyMatrix;
 
 import GraphCreation.Edge;
 

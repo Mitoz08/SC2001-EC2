@@ -1,5 +1,4 @@
-package GraphCreation.AdjacencyList;
-
+package AdjacencyList;
 
 import GraphCreation.Edge;
 
