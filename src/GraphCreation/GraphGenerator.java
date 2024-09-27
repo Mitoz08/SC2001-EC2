@@ -1,7 +1,7 @@
 package GraphCreation;
 
-import GraphCreation.AdjacencyList.AdjacencyList;
-import GraphCreation.AdjacencyMatrix.AdjacencyMatrix;
+import AdjacencyList.AdjacencyList;
+import AdjacencyMatrix.AdjacencyMatrix;
 
 public class GraphGenerator {
     public static void Generate(int Vertices, int Edges, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {

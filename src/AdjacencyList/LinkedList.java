@@ -1,4 +1,4 @@
-package GraphCreation.AdjacencyList;
+package AdjacencyList;
 
 
 class ListNode {
