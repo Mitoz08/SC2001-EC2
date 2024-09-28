@@ -44,6 +44,7 @@ public class GraphGenerator {
                     edgeCount[i]++;
                     edgeCount[j]++;
                     Edges--;
+
                 }
             }
         }
