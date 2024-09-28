@@ -1,17 +1,7 @@
 package AdjacencyList;
 
 
-class ListNode {
-    public int tVertex;         // Terminal vertex
-    public int weight;          // Weight of edge
-    public ListNode nextNode;   // Next node
 
-    public ListNode(int tVertex, int weight){
-        this.tVertex = tVertex;
-        this.weight = weight;
-        this.nextNode = null;
-    }
-}
 
 public class LinkedList {
 
@@ -29,6 +19,10 @@ public class LinkedList {
         this.numEdges = 0;
         this.head = null;
         this.tail = null;
+    }
+
+    public LinkedList() {
+
     }
 
     // Getter
@@ -70,6 +64,9 @@ public class LinkedList {
             System.out.print("--> ");
         }
         System.out.println();
+    }
+    public ListNode getHead(){
+        return this.head;
     }
 
 }

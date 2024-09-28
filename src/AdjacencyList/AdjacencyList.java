@@ -42,5 +42,9 @@ public class AdjacencyList {
         for (LinkedList ll: this.List) {
             ll.print();
         }
+
+    }
+    public LinkedList getAdjacencyList(int vertex){
+        return this.List[vertex];
     }
 }
