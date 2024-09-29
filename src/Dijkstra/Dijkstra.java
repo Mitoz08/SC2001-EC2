@@ -51,7 +51,7 @@ public class Dijkstra {
         ArrayList<Pair> pq = new ArrayList<>(); //Using a sorted list to add a 2-tuple (initial vertex, Weight of edge)
         pq.add(new Pair(source, 0)); //"Enqueue" into a priority queue
         while (!pq.isEmpty()){
-            Pair curPair = pq.remove(0); //remove the element from the top of the priority queue
+            Pair curPair = pq.remove(pq.size()-1); //remove the element from the top of the priority queue, we arrange the array in descending order so that we can remove the shortest distance in constant time
             int curNode = curPair.node;
             int weight  = curPair.weight;
 
@@ -68,8 +68,8 @@ public class Dijkstra {
     }
     private void add(ArrayList<Pair> pq, Pair newPair) {
         int i = 0;
-        // Find the correct position to insert the new pair
-        while (i < pq.size() && pq.get(i).weight < newPair.weight) {
+        // Find the correct position to insert the new pair, we want to sort it in DESCENDING ORDER
+        while (i < pq.size() && pq.get(i).weight > newPair.weight) {
             i++;
         }
         // Insert the new pair at the correct position

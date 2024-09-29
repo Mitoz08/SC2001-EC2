@@ -13,8 +13,10 @@ public class Main {
                 AdjacencyMatrix matrix = new AdjacencyMatrix(maxVertex);
                 GraphGenerator.Generate(maxVertex, 2*maxVertex, list, matrix);
                 Dijkstra test = new Dijkstra();
-                int[] array = test.Dijkstra(list,0);
-                System.out.println(Arrays.toString(array));
+                int[] a1 = test.Dijkstra(list,0);
+                int[] a2 = test.Dijkstra(matrix,0);
+                System.out.println(Arrays.toString(a1));
+                System.out.println(Arrays.toString(a2));
 
             }
         }
