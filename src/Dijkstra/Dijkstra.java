@@ -57,7 +57,7 @@ public class Dijkstra {
 
             for (int l=0; l< matrix.getMaxVertex(); l++){
                 int curWeight = matrix.getWeight(curNode,l);
-                if (weight + curWeight < dis[l] && curWeight != -1){
+                if (weight + curWeight < dis[l] && curWeight != -1){ //check if there is an edge and if going through that edge is indeed shorter
                     dis[l] = weight + curWeight;
                     add(pq, new Pair(l,dis[l])); //"Enqueue" into a priority queue while by inserting it in ascending order
                 }
