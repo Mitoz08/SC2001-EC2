@@ -16,8 +16,8 @@ public class Main {
 
         out.println("maxVertex, repeat, timeTaken");
 
-        for (int maxVertex=5; maxVertex<=10; maxVertex+=5) {
-            for (int repeat = 1; repeat <= 10; repeat++) {
+        for (int maxVertex=1_000; maxVertex<=10_000; maxVertex+=100) {
+            for (int repeat = 1; repeat <= 20; repeat++) {
                 AdjacencyList list = new AdjacencyList(maxVertex);
                 AdjacencyMatrix matrix = new AdjacencyMatrix(maxVertex);
                 GraphGenerator.Generate(maxVertex, 2*maxVertex, list, matrix);
@@ -28,6 +28,7 @@ public class Main {
                 long timeTaken = (endTime-startTime)/1000; //in microseconds
                 out.printf("%d, %d, %d\n", maxVertex, repeat, timeTaken);
             }
+            System.out.println("This is the " + maxVertex + " case" );
         }
         out.close();
     }
