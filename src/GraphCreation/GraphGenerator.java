@@ -6,9 +6,9 @@ import AdjacencyMatrix.AdjacencyMatrix;
 public class GraphGenerator {
 
 
-    public static void Generate(int Vertices, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
+    public static int Generate(int Vertices, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
         // Add Class Object to the parameter to run addEdge Function
-
+        int totalEdge = 0;
         for (int i = 0; i < Vertices; i++) {
             for (int j = i + 1; j < Vertices; j++) {
                 // Create GraphCreation.Edge
@@ -18,15 +18,18 @@ public class GraphGenerator {
                 // Run addEdge function on both class
                 AdjList.addEdge(newEdge);
                 AdjMatrix.addEdge(newEdge);
+                totalEdge++;
             }
         }
+        return totalEdge;
     }
 
-    public static void Generate(int Vertices, int Edges, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
+    public static int Generate(int Vertices, int Edges, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
         // Add Class Object to the parameter to run addEdge Function
 
         int [] edgeCount = new int[Vertices];
         double probability = (double) Edges / (double) (Vertices * (Vertices - 1) / 2);
+        int totalEdge = 0;
 
         for ( int i = 0; i < Vertices; i++){
             if (Edges == 0) break;
@@ -44,6 +47,7 @@ public class GraphGenerator {
                     edgeCount[i]++;
                     edgeCount[j]++;
                     Edges--;
+                    totalEdge++;
                 }
             }
         }
@@ -58,7 +62,7 @@ public class GraphGenerator {
                     terminalVertex = (int) (Math.random() * Vertices);
                 } while (terminalVertex == i);
 
-                Edge newEdge = new Edge(i,terminalVertex,10); // Generate random weight
+                Edge newEdge = new Edge(i,terminalVertex,randomWeight()); // Generate random weight
 
                 // Run addEdge function on both class
 
@@ -67,9 +71,10 @@ public class GraphGenerator {
 
                 edgeCount[i]++;
                 edgeCount[terminalVertex]++;
-
+                totalEdge++;
             }
         }
+        return totalEdge;
     }
 
     private static int randomWeight(){
