@@ -3,6 +3,9 @@ package GraphCreation;
 import AdjacencyList.AdjacencyList;
 import AdjacencyMatrix.AdjacencyMatrix;
 
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentNavigableMap;
+
 public class GraphGenerator {
 
 
@@ -27,53 +30,64 @@ public class GraphGenerator {
     public static int Generate(int Vertices, int Edges, AdjacencyList AdjList, AdjacencyMatrix AdjMatrix) {
         // Add Class Object to the parameter to run addEdge Function
 
-        int [] edgeCount = new int[Vertices];
         double probability = (double) Edges / (double) (Vertices * (Vertices - 1) / 2);
         int totalEdge = 0;
 
-        for ( int i = 0; i < Vertices; i++){
-            if (Edges == 0) break;
-            for ( int j = i+1; j < Vertices; j++){
-                if (Edges == 0) break;
-                if (Math.random() < probability){
-                    // Create GraphCreation.Edge
+        Edge newEdge;
 
-                    Edge newEdge = new Edge(i,j,randomWeight()); // Generate random weight
+        for (int i = 1; i < Vertices; i++) { // Creating a MST
+            int randomVertex = (int) (Math.random() * i);
+            newEdge = new Edge(i,randomVertex,randomWeight());
 
-                    // Run addEdge function on both class
-                    AdjList.addEdge(newEdge);
-                    AdjMatrix.addEdge(newEdge);
+            AdjList.addEdge(newEdge);
+            AdjMatrix.addEdge(newEdge);
 
-                    edgeCount[i]++;
-                    edgeCount[j]++;
-                    Edges--;
-                    totalEdge++;
+            totalEdge++;
+        }
+
+        while (totalEdge < Edges) {
+            for ( int i = 0; i < Vertices; i++){
+                if (totalEdge >= Edges) break;
+                for ( int j = i+1; j < Vertices; j++){
+                    if (totalEdge >= Edges) break;
+                    if (!(AdjMatrix.getWeight(i,j) < 0)) continue;
+                    if (Math.random() < probability){
+                        // Create GraphCreation.Edge
+
+                        newEdge = new Edge(i,j,randomWeight()); // Generate random weight
+
+                        // Run addEdge function on both class
+                        AdjList.addEdge(newEdge);
+                        AdjMatrix.addEdge(newEdge);
+
+                        totalEdge++;
+                    }
                 }
             }
         }
 
         // Check for isolated vertex
 
-        for ( int i = 0; i < Vertices; i++) {
-            if (edgeCount[i] == 0) {
-                // Add a random edge so that it is not isolated
-                int terminalVertex;
-                do {
-                    terminalVertex = (int) (Math.random() * Vertices);
-                } while (terminalVertex == i);
-
-                Edge newEdge = new Edge(i,terminalVertex,randomWeight()); // Generate random weight
-
-                // Run addEdge function on both class
-
-                AdjList.addEdge(newEdge);
-                AdjMatrix.addEdge(newEdge);
-
-                edgeCount[i]++;
-                edgeCount[terminalVertex]++;
-                totalEdge++;
-            }
-        }
+//        for ( int i = 0; i < Vertices; i++) {
+//            if (edgeCount[i] == 0) {
+//                // Add a random edge so that it is not isolated
+//                int terminalVertex;
+//                do {
+//                    terminalVertex = (int) (Math.random() * Vertices);
+//                } while (terminalVertex == i);
+//
+//                Edge newEdge = new Edge(i,terminalVertex,randomWeight()); // Generate random weight
+//
+//                // Run addEdge function on both class
+//
+//                AdjList.addEdge(newEdge);
+//                AdjMatrix.addEdge(newEdge);
+//
+//                edgeCount[i]++;
+//                edgeCount[terminalVertex]++;
+//                totalEdge++;
+//            }
+//        }
         return totalEdge;
     }
 
