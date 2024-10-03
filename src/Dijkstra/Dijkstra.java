@@ -13,6 +13,7 @@ public class Dijkstra {
 
     public int[] Dijkstra(AdjacencyList list, int source){
         int[] dis = new int[list.getMaxVertex()];
+        boolean[] visited = new boolean[list.getMaxVertex()];
         PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.weight - b.weight);
         for (int i=0; i<list.getMaxVertex(); i++){
             dis[i] = Integer.MAX_VALUE; //Assign MAX INTEGER
@@ -24,14 +25,20 @@ public class Dijkstra {
             int curNode = curPair.node;
             int weight = curPair.weight;
 
-            LinkedList temp = new LinkedList();
-            temp = list.getAdjacencyList(curNode); //Finding initial vertex
+            if (visited[curNode]) continue; // If vertex already checked, skip. Basically ignoring duplicate
+            visited[curNode] = true;
 
-            ListNode node = new ListNode();
-            node = temp.getHead();
+            ListNode node = list.getAdjacencyList(curNode).getHead();
             while (node != null){ //Stop until there is no more neighbours
+
                 int neighbor = node.tVertex;
                 int curWeight = node.weight;
+
+                if (visited[neighbor]) { // If shortest distance is already found there is no need to check again
+                    node = node.nextNode;
+                    continue;
+                }
+
                 if (weight + curWeight < dis[neighbor]){
                     dis[neighbor] = weight + curWeight;
                     pq.add(new Pair(neighbor, dis[neighbor]));
@@ -44,6 +51,7 @@ public class Dijkstra {
     }
     public int[] Dijkstra(AdjacencyMatrix matrix, int source){
         int[] dis = new int[matrix.getMaxVertex()];
+        boolean[] visited = new boolean[matrix.getMaxVertex()];
         for (int i=0; i< matrix.getMaxVertex(); i++){
             dis[i] = Integer.MAX_VALUE; //Assign MAX INTEGER
         }
@@ -55,7 +63,14 @@ public class Dijkstra {
             int curNode = curPair.node;
             int weight  = curPair.weight;
 
+            if (visited[curNode]) continue; // If vertex already checked, skip. Basically ignoring duplicate
+            visited[curNode] = true;
+
             for (int l=0; l< matrix.getMaxVertex(); l++){
+
+                if (visited[l]) continue;   // If shortest distance is already found there is no need to check again
+                                            // Ignores edge (l,l) too as set to true previously
+
                 int curWeight = matrix.getWeight(curNode,l);
                 if (weight + curWeight < dis[l] && curWeight != -1){ //check if there is an edge and if going through that edge is indeed shorter
                     dis[l] = weight + curWeight;
